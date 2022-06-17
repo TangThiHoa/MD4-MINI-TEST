@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout :: head">
+</head>
+<body>
+<h3>Posts</h3>
+<table id="posts">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Title</th>
+        <th>Content</th>
+        <th>CreateAt</th>
+        <th>Likes</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="pro : ${name}">
+        <td th:text="${pro.id}"></td>
+        <td th:text="${pro.title}"></td>
+        <td th:text="${pro.content}"></td>
+        <td th:text="${pro.createAt}"></td>
+        <td th:text="${pro.likes}"></td>
+    </tr>
+    </tbody>
+</table>
+<footer th:replace="/layout :: footer"></footer>
+</body>

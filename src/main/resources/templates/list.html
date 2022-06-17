@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+</head>
+<body>
+<h3>Post</h3>
+
+<p>
+  <a th:href="@{/posts/create}">
+    Add new post
+  </a><br>
+  <br>
+  <a th:href="@{/posts/top4New}">
+    List new post
+  </a>
+</p>
+<form>
+  <input type="text" name="search">
+  <button>Search</button>
+</form>
+
+<div class="notify">
+  <div th:if="${success}">
+    <span th:text="${success}"></span>
+  </div>
+</div>
+<table id="posts">
+  <thead>
+  <tr>
+    <th>Id</th>
+    <th>Title</th>
+    <th>Content</th>
+    <th>CreateAt</th>
+    <th>Likes</th>
+    <th>Edit</th>
+    <th>Delete</th>
+    <th>View</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="pro : ${post}">
+    <td th:text="${pro.id}"></td>
+    <td th:text="${pro.title}"></td>
+    <td th:text="${pro.content}"></td>
+    <td th:text="${pro.createAt}"></td>
+    <td th:text="${pro.likes}"></td>
+    <td><a th:href="@{/posts/edit/__${pro.id}__}">Edit</a></td>
+    <td><a th:href="@{/posts/delete/__${pro.id}__}">Delete</a></td>
+    <td><a th:href="@{/posts/view/__${pro.id}__}">View</a></td>
+  </tr>
+  </tbody>
+</table>
+<footer th:replace="/layout :: footer"></footer>
+</body>
