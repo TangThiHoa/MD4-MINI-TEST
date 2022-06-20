@@ -5,7 +5,7 @@
 <h3>Post</h3>
 
 <p>
-  <a th:href="@{/posts/create}">
+  <a th:href="@{/posts/create-post}">
     Add new post
   </a><br>
   <br>
@@ -13,15 +13,31 @@
     List new post
   </a>
 </p>
+<!--<form>-->
+<!--  <input type="text" name="search">-->
+<!--  <button>Search</button>-->
+<!--</form>-->
 <form>
-  <input type="text" name="search">
-  <button>Search</button>
+  Search by first name:
+  <input name="search" type="text"/>
+  <input type="submit" value="Search"/>
+</form>
+<hr>
+<form th:action="@{/posts/search}">
+  <input type="datetime-local" name="from">
+  <input type="datetime-local" name="to">
+<button>SearchfindByCrearAtBetween</button>
 </form>
 
 <div class="notify">
   <div th:if="${success}">
     <span th:text="${success}"></span>
   </div>
+</div>
+<div>
+  <a th:href="@{'/posts'(page=${posts.number - 1})}" th:if="${posts.hasPrevious()}">Previous</a>
+  <span th:text="${posts.number + 1}"></span>/<span th:text="${posts.totalPages}"></span>
+  <a th:href="@{'/posts'(page=${posts.number + 1})}" th:if="${posts.hasNext()}">Next</a>
 </div>
 <table id="posts">
   <thead>
@@ -37,7 +53,7 @@
   </tr>
   </thead>
   <tbody>
-  <tr th:each="pro : ${post}">
+  <tr th:each="pro : ${posts}">
     <td th:text="${pro.id}"></td>
     <td th:text="${pro.title}"></td>
     <td th:text="${pro.content}"></td>
